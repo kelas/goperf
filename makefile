@@ -6,7 +6,8 @@ GOO=go
 all: clang gcc golang
 
 clang: clean
-	$(LVM) -Rpass=loop-vectorize -fslp-vectorize -fvectorize -O3 -arch=broadwell iota.cpp -w -o iota
+	# -Rpass=loop-vectorize
+	$(LVM) -fslp-vectorize -fvectorize -O3 -arch=broadwell iota.cpp -w -o iota
 	./iota
 
 gcc: clean
@@ -25,6 +26,7 @@ golang: clean
 	$(GOO) build iota.go
 	time ./iota 10000 10000 false  # single
 	time ./iota 10000 10000 true   # parallel
+	time ./iota 1000000 100 true   # parallel, fewer goroutines
 
 clean:
 	rm -f iota

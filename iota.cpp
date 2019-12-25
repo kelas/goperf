@@ -7,13 +7,14 @@
 #define T long long
 #define J unsigned long long
 #define I int
+#define U unsigned int
 
 #define NOW chrono::high_resolution_clock::now()
 #define CLK start=NOW;acc=0;
 #define LAP cout << chrono::duration_cast<chrono::milliseconds>(NOW-start).count() << "ms";
 #define IOTA N(SZ,t[i]=i)
 #define W while
-#define N(n,a...) {unsigned int _n=(n),i=0;W(i<_n){a;++i;}}           //!< while(i<n){a}
+#define N(n,a...) {U _n=(n),i=0;W(i<_n){a;++i;}}           //!< while(i<n){a}
 #define R return 0;
 
 using namespace std;
