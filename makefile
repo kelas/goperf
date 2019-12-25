@@ -34,6 +34,12 @@ icc-parallel: clean
 	$(SZ)
 	$(TIME) ./iota $(OUT)
 
+tcc:
+	@tcc -O3 iota.c -o iota
+	@echo tcc:
+	$(SZ)
+	$(TIME) ./iota $(OUT)
+
 # arguments
 # ./iota ns np parallel
 #     ns chunck/split size per go-routine
