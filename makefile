@@ -2,7 +2,7 @@
 LVM=@/opt/clang/bin/clang++
 GNU=@/opt/rh/devtoolset-8/root/usr/bin/x86_64-redhat-linux-c++
 ICC=/opt/intel/bin/icc -std=c++11
-GOO=@go
+GOO=@go build -ldflags="-s -w" -tags production
 TIME=@/usr/bin/time --format "all %E mem %M cpu %P" --
 SZ=@strip iota && ls -lah iota
 #OUT=>/dev/null
@@ -52,7 +52,7 @@ golang-hog: clean build-go
 	$(TIME) ./iota 512 1048576 true $(OUT)
 
 build-go:
-	$(GOO) build -tags production iota.go
+	$(GOO) iota.go
 	@echo golang:
 	$(SZ)
 
