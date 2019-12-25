@@ -4,10 +4,10 @@ GNU=@/opt/rh/devtoolset-8/root/usr/bin/x86_64-redhat-linux-c++
 ICC=/opt/intel/bin/icc -std=c++11
 GOO=@go
 TIME=@/usr/bin/time --format "all %E mem %M cpu %P" --
-SZ=strip iota && ls -lah iota
+SZ=@strip iota && ls -lah iota
 #OUT=>/dev/null
 
-all: clang gcc icc iccpar golang
+all: clang gcc icc icc-parallel golang golang-parallel golang-hog
 
 clang: clean
 	@# -Rpass=loop-vectorize
@@ -28,7 +28,7 @@ icc: clean
 	$(SZ)
 	$(TIME) ./iota $(OUT)
 
-iccpar: clean
+icc-parallel: clean
 	$(ICC) -Os -vec -noalign -parallel -ip iota.cpp -w -o iota
 	@echo icc-parallel:
 	$(SZ)
@@ -42,15 +42,19 @@ iccpar: clean
 #
 # the total array size is ns*np
 
-golang: clean
+golang: clean build-go
+	$(TIME) ./iota 1048576 512 false $(OUT)
+
+golang-parallel: clean build-go
+	$(TIME) ./iota 1048576 512 true $(OUT)
+
+golang-hog: clean build-go
+	$(TIME) ./iota 512 1048576 true $(OUT)
+
+build-go:
 	$(GOO) build -tags production iota.go
 	@echo golang:
 	$(SZ)
-	$(TIME) ./iota 1048576 512 false $(OUT)
-	$(TIME) ./iota 1048576 512 true $(OUT)
-	$(TIME) ./iota 1048576 512 true $(OUT)
-	$(TIME) ./iota 1048576 512 true $(OUT)
-	$(TIME) ./iota 512 1048576 true $(OUT)
 
 clean:
 	rm -f iota
