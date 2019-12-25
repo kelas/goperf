@@ -8,14 +8,14 @@ OUT=>/dev/null
 all: clang gcc golang
 
 clang: clean
-	# -Rpass=loop-vectorize
+	@# -Rpass=loop-vectorize
 	$(LVM) -fslp-vectorize -fvectorize -O3 iota.cpp -w -o iota
-	@echo clang
+	@echo clang:
 	$(RUN) $(OUT)
 
 gcc: clean
 	$(GNU) -O3 iota.cpp -w -o iota
-	@echo gcc
+	@echo gcc:
 	$(RUN) $(OUT)
 
 # arguments
@@ -28,7 +28,7 @@ gcc: clean
 
 golang: clean
 	$(GOO) build iota.go
-	@echo golang
+	@echo golang:
 	$(RUN) 10000 10000 false >/dev/null
 	$(RUN) 10000 10000 true  >/dev/null
 	$(RUN) 1000000 100 true  >/dev/null
