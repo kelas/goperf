@@ -2,8 +2,7 @@
 #include <chrono>
 
 #define RND 8
-//#define SZ 1024*1024*512
-#define SZ 10000*10000
+#define SZ 1048576*512
 #define T long long
 #define J unsigned long long
 #define I int
