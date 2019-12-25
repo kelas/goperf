@@ -24,9 +24,9 @@ gcc: clean
 
 golang: clean
 	$(GOO) build iota.go
-	time ./iota 10000 10000 false  # single
-	time ./iota 10000 10000 true   # parallel
-	time ./iota 1000000 100 true   # parallel, fewer goroutines
+	./iota 10000 10000 false  # single
+	./iota 10000 10000 true   # parallel
+	./iota 1000000 100 true   # parallel, fewer goroutines
 
 clean:
 	rm -f iota
