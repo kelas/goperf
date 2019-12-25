@@ -24,7 +24,7 @@ gcc: clean
 
 icc: clean
 	$(ICC) -O3 iota.cpp -w -o iota
-	@echo icc-parallel:
+	@echo icc:
 	$(SZ)
 	$(TIME) ./iota $(OUT)
 
