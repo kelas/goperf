@@ -12,6 +12,7 @@
 #define CLK start = clock();acc=0;
 #define DIFF(e,s) (J)((e - s) * 1E3 / CLOCKS_PER_SEC)
 #define LAP printf("%lldms ", DIFF(start,clock()));
+#define CHK N(SZ,acc+=t[i])O("%lld\n",acc)
 #define IOTA N(SZ,t[i]=i)
 #define W while
 #define N(n,a...) {U _n=(n),i=0;W(i<_n){a;++i;}}           //!< while(i<n){a}
@@ -19,17 +20,8 @@
 #define O printf
 
 I main(){
-    T*t=malloc(SZ*sizeof(T));T acc;clock_t start,end;
-    IOTA //warmup
-    
-    N(RND,
-      CLK
-      IOTA
-      LAP
-      N(SZ,acc+=t[i])
-      O("%lld\n",acc)
-    )
-    free(t);
-}
+    T*t=malloc(SZ*sizeof(T)),acc;clock_t start,end;IOTA//warmup    
+    N(RND,CLK IOTA LAP CHK)
+    free(t);}
 
 //:~

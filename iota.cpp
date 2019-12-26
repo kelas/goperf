@@ -11,6 +11,7 @@
 #define NOW chrono::high_resolution_clock::now()
 #define CLK start=NOW;acc=0;
 #define LAP cout << chrono::duration_cast<chrono::milliseconds>(NOW-start).count() << "ms";
+#define CHK N(SZ,acc+=t[i])cout << " " << acc << endl;
 #define IOTA N(SZ,t[i]=i)
 #define W while
 #define N(n,a...) {U _n=(n),i=0;W(i<_n){a;++i;}}           //!< while(i<n){a}
@@ -19,16 +20,7 @@
 using namespace std;
 
 I main(){
-    T*t=new T[SZ];T acc;auto CLK
-    IOTA //warmup
-    
-    N(RND,
-      CLK
-      IOTA
-      LAP
-      N(SZ,acc+=t[i])
-      cout << " " << acc << endl
-    )
-}
+    T*t=new T[SZ],acc;auto CLK;IOTA//warmup
+    N(RND, CLK IOTA LAP CHK)}
 
 //:~
